@@ -43,23 +43,23 @@ pipeline {
         stage('Terraform Plan & Approve') {
             steps {
                 dir('terraform') {
-                    // Generates execution plan and saves it as a secure static artifact
-                 //   sh """
-                   //     terraform plan \
-                     //   -var="aws_region=${params.AWS_REGION}" \
-                       // -var="ami_id=${params.AMI_ID}" \
-                      //  -var="server_type=${params.SERVER_TYPE}" \
-                       // -out=tfplan
-                    //"""
-
-                       sh """
-                        terraform plan \
-                       -lock-timeout=5m \
-                       -var="aws_region=${params.AWS_REGION}" \
+                 Generates execution plan and saves it as a secure static artifact
+                    sh """
+                       terraform plan \
+                        -var="aws_region=${params.AWS_REGION}" \
                        -var="ami_id=${params.AMI_ID}" \
                         -var="server_type=${params.SERVER_TYPE}" \
                         -out=tfplan
-                        """
+                    """
+
+                    //   sh """
+                      //  terraform plan \
+                      //   -lock-timeout=5m \
+                     //    -var="aws_region=${params.AWS_REGION}" \
+                      //   -var="ami_id=${params.AMI_ID}" \
+                       //   -var="server_type=${params.SERVER_TYPE}" \
+                       //   -out=tfplan
+                       //   """
                 }
                 
                 // Pauses execution and places a 15-minute lock threshold
